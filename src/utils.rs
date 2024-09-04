@@ -1,7 +1,13 @@
 
+pub async fn get_random_coffee_img() -> Result<String, reqwest::Error> {
 
-pub fn get_random_coffee_img() -> String {
-  String::from("image")
+  // reqwest is a HTTP Client
+  let res = reqwest::get("https://coffee.alexflipnote.dev/random.json").await?;
+
+  let body = res.text().await?;
+
+  Ok(body)
+  
 }
 
 

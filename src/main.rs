@@ -2,7 +2,8 @@ use std::io::stdin; // the input/output functionality from the standard library
 
 pub mod utils;
 
-fn main() {
+#[tokio::main] // Tokio is an event-driven, non-blocking I/O platform for writing asynchronous applications
+async fn main() {
 
   println!("Welcome! \n");
 
@@ -19,8 +20,11 @@ fn main() {
     .read_line(&mut input)
     .expect("Failed to read line");
 
-  let img: String = utils::get_random_coffee_img();
+  let res: Result<String, reqwest::Error> = utils::get_random_coffee_img().await;
 
-  println!("{img}");
-  
+  match res {
+    Ok(img) => println!("{img}"),
+    Err(_) => println!("Error")
+  }
+
 }
