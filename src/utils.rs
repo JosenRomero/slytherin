@@ -6,7 +6,10 @@ pub async fn get_random_coffee_img() -> Result<String, reqwest::Error> {
 
   let body = res.text().await?;
 
-  Ok(body)
+  // // serde_json is a JSON serialization file format
+  let img: serde_json::Value = serde_json::from_str(&body).expect("Error serializing to JSON");
+  
+  Ok(img["file"].to_string())
   
 }
 
