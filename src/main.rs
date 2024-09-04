@@ -1,3 +1,26 @@
+use std::io::stdin; // the input/output functionality from the standard library
+
+pub mod utils;
+
 fn main() {
-    println!("Hello, world!");
+
+  println!("Welcome! \n");
+
+  println!("Press any key to get a random coffee image");
+  
+  let mut input: String = String::new();
+  
+  /* 
+  read_line method: handle to get input from the user.
+    The '&myVariable' indicates that this argument is a reference. references are immutable by default.
+    then '&mut myVariable' to make it mutable.
+  */
+  stdin()
+    .read_line(&mut input)
+    .expect("Failed to read line");
+
+  let img: String = utils::get_random_coffee_img();
+
+  println!("{img}");
+  
 }
