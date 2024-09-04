@@ -1,3 +1,5 @@
+use serde::{Deserialize, Serialize};
+
 
 pub async fn get_random_coffee_img() -> Result<String, reqwest::Error> {
 
@@ -7,10 +9,13 @@ pub async fn get_random_coffee_img() -> Result<String, reqwest::Error> {
   let body = res.text().await?;
 
   // // serde_json is a JSON serialization file format
-  let img: serde_json::Value = serde_json::from_str(&body).expect("Error serializing to JSON");
+  let data: CoffeeData = serde_json::from_str(&body).expect("Error serializing to JSON");
   
-  Ok(img["file"].to_string())
+  Ok(data.file)
   
 }
 
-
+#[derive(Serialize, Deserialize, Debug)]
+struct CoffeeData {
+  file: String
+}

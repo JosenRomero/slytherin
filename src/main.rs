@@ -23,7 +23,7 @@ async fn main() {
   let res: Result<String, reqwest::Error> = utils::get_random_coffee_img().await;
 
   match res {
-    Ok(img) => println!("{img}"),
+    Ok(img) => println!("Image: {img}"),
     Err(_) => println!("Error")
   }
 
